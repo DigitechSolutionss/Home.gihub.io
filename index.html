@@ -28,7 +28,10 @@
         .hero {
             text-align: center;
             padding: 100px 0;
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)), url('hero3.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
@@ -231,7 +234,9 @@
         .web-dev { background: linear-gradient(135deg, #667eea, #764ba2); }
         .ai-bot { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
         .digital-marketing { background: linear-gradient(135deg, #a8edea, #fed6e3); }
-        .custom-coding { background: linear-gradient(135deg, #ffd89b, #19547b); }
+        .seo { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+        .automation { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .security { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 
         .service-card h3 {
             font-size: 1.5rem;
@@ -459,6 +464,24 @@
                     <h3>Custom Coding</h3>
                     <p>Got a wild idea that doesn't fit in a box? Perfect! We love challenges. Whether it's automation scripts, APIs, or completely custom solutions—if you can dream it, we can code it.</p>
                 </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon seo">🔍</div>
+                    <h3>SEO & Search Optimization</h3>
+                    <p>Climb the search rankings and get found by the right customers. Our SEO strategies combine technical expertise with content optimization to boost your visibility and drive organic traffic that converts.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon automation">🔧</div>
+                    <h3>Automation</h3>
+                    <p>Why do repetitive tasks when robots can do them better? We build smart automation solutions that save you time, reduce errors, and let you focus on what matters most—growing your business.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon security">🔐</div>
+                    <h3>Security Analysis</h3>
+                    <p>Protect your digital assets with comprehensive security audits. We identify vulnerabilities, implement robust protection measures, and ensure your systems stay secure against evolving cyber threats.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -492,6 +515,9 @@
                             <option value="ai-chatbots">AI Chatbots</option>
                             <option value="digital-marketing">Digital Marketing</option>
                             <option value="custom-coding">Custom Coding</option>
+                            <option value="seo">SEO & Search Optimization</option>
+                            <option value="automation">Automation</option>
+                            <option value="security">Security Analysis</option>
                             <option value="multiple">Multiple Services</option>
                             <option value="not-sure">Not Sure Yet</option>
                         </select>
@@ -542,20 +568,38 @@
                 return;
             }
             
-            // Simulate form submission (replace with your actual form handler)
+            // Create mailto link
+            const subject = encodeURIComponent(`New Contact Form Submission from ${data.name}`);
+            const body = encodeURIComponent(`
+Name: ${data.name}
+Email: ${data.email}
+Project Type: ${data.project || 'Not specified'}
+
+Message:
+${data.message}
+
+---
+Sent from Digitech Solutions contact form
+            `);
+            
+            const mailtoLink = `mailto:digitechsolutionss@outlook.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show confirmation
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             
-            submitBtn.textContent = 'Sending... ⏳';
+            submitBtn.textContent = 'Opening Email Client... 📧';
             submitBtn.disabled = true;
             
-            // Simulate API call delay
             setTimeout(() => {
-                alert('Thanks for your message! We\'ll get back to you within 24 hours.');
+                alert('Your email client should open with the pre-filled message. If it doesn\'t open automatically, please send an email to digitechsolutionss@outlook.com with your inquiry.');
                 this.reset();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }, 1000);
+            }, 2000);
         });
 
         // Animation on scroll
